@@ -5,7 +5,7 @@
 
 # Dataset_Link: https://www.kaggle.com/datasets/mirichoi0218/insurance
               
-#             Dataset_Name: insurance.csv
+#             Dataset_Name: insurance(update).csv
 # ===================================================================
 
 # --------------------- Install & Load Libraries ---------------------
@@ -21,14 +21,15 @@ cat("All ibraries loaded successfully!\n")
 
 # --------------------- A. DATA UNDERSTANDING ---------------------
 
-# mydata <- read.csv("https://drive.google.com/uc?id=YOUR_ACTUAL_FILE_ID_HERE&export=download",header = TRUE, stringsAsFactors = FALSE)
+# A1. Load DataSet
+mydata <- read.csv("https://drive.google.com/uc?id=1o0qtotp3GWZtd4QkrJXtuxyuhbnGbXV&export=download",header = TRUE, stringsAsFactors = FALSE)
 
-mydata <- read.csv("C:/Users/My PC/Downloads/Rafi/insurance.csv",header = TRUE, stringsAsFactors = FALSE)
+#mydata <- read.csv("C:/Users/My PC/Downloads/Insurence(Linear Regression)/insurance(update).csv",header = TRUE, stringsAsFactors = FALSE)
 
 # A2. First few rows
 head(mydata, 10)
 
-# Original Dataset doesn't any missing values & outliers.
+# Original Dataset doesn't have any missing values & outliers.
 # Intentionally create some missing values & outliers.
 
 set.seed(123)
@@ -46,7 +47,7 @@ str(mydata)
 cat("\nCategorical: sex, smoker, region\n")
 cat("Numerical: age, bmi, children, charges\n")
 
-# A5. Descriptive statistics + skewness (manual, no extra package)
+# A5. Descriptive statistics + skewness 
 summary(mydata)
 num_cols <- c("age", "bmi", "children", "charges")
 
@@ -65,7 +66,7 @@ print(skew_values)
 
 # --------------------- B. DATA EXPLORATION & VISUALIZATION ---------------------
 
-# Univariate
+#B1. Univariate
 ggplot(mydata, aes(x = age)) + 
   geom_histogram(binwidth = 5, fill = "steelblue") +
   ggtitle("Distribution of Age") + theme_minimal()
@@ -87,7 +88,7 @@ ggplot(mydata, aes(x = sex)) + geom_bar(fill = "pink") + ggtitle("Gender")
 ggplot(mydata, aes(x = smoker)) + geom_bar(fill = "red") + ggtitle("Smoker")
 ggplot(mydata, aes(x = region)) + geom_bar(fill = "darkgreen") + ggtitle("Region")
 
-# Bivariate
+# B2. Bivariate
 num_data <- mydata[, num_cols]
 cor_matrix <- cor(num_data, use = "complete.obs")
 corrplot(cor_matrix, method = "color", type = "upper", 
